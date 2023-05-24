@@ -1,4 +1,4 @@
-import random
+
 from pygame import mixer
 
 def computer_guess():
