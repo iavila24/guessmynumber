@@ -101,3 +101,4 @@ git commit -m "Mi aportación"
 git push origin main
 ~~~
 
+13. Crea finalmente un Pull Request al maestro de python y espera a que acepte tu solicitud de aportación, recuerda que el profe aún rifa 😎.
