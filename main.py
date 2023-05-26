@@ -73,6 +73,10 @@ def menu():
     print("3. Salir")
 
     while True:
+        print("¡Bienvenido al Menú de Juegos!")
+        print("1. Adivinar el número")
+        print("2. Adivina la edad")
+        print("3. Salir")
         seleccion = input("Ingresa el número de juego que deseas jugar (1-3): ")
 
         if seleccion == '1':
