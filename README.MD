@@ -98,5 +98,6 @@ git commit -m "Mi aportación"
 12. Realizamos el push
 
 ~~~
-git push origin main"
+git push origin main
 ~~~
+
