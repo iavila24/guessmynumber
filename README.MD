@@ -66,7 +66,7 @@ git remote add upstream [Link del repositorio original]
 git remote -v
 ~~~
 
-8. Traemos las posibles modificaciones que se hayan realizado en el repositorio original con la conexion de nombre upstream
+8. Traemos las posibles modificaciones que se hayan realizado en el repositorio original con conexion de nombre upstream
 
 ~~~
 git fetch upstream
@@ -81,6 +81,22 @@ git rebase upstream/main
 git push origin main --force
 ~~~
 
-9. Realizamos nuestras aportaciones
+10. Realizamos nuestras aportaciones
 
+11. Realizamos el commit
 
+~~~
+git status
+~~~
+~~~
+git add .
+~~~
+~~~
+git commit -m "Mi aportación"
+~~~
+
+12. Realizamos el push
+
+~~~
+git push origin main"
+~~~
