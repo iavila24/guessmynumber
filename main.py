@@ -40,9 +40,9 @@ def computer_guess():
             print(name_line.strip())
 
 def adivinar_edad():
-    print("¡Bienvenido al juego de adivinar la edad!")
-    print("Piensa en un número entre 1 y 100, y trataré de adivinarlo.")
-    print("Cuando estés listo, presiona ENTER.")
+    print("\n¡Bienvenido al juego de adivinar la edad!")
+    print("Ingresa una edad entre 1 y 100, y trataré de adivinarlo.")
+    print("Cuando estés listo, ingresa la edad y presiona ENTER.")
     input()
 
     limite_inferior = 1
@@ -51,10 +51,13 @@ def adivinar_edad():
 
     while True:
         intentos += 1
-        numero_adivinado = random.randint(limite_inferior, limite_superior)
+        if limite_inferior != limite_superior:
+            numero_adivinado = random.randint(limite_inferior, limite_superior)
+        else:
+            numero_adivinado = limite_inferior
 
         print("¿Tu edad es {}?".format(numero_adivinado))
-        respuesta = input("Ingresa 's' si es correcto, 'm' si tu edad es mayor o 'l' si es menor: ")
+        respuesta = input("Ingresa 'S' si es correcto, 'M' si tu edad es mayor o 'L' si es menor: ").lower()
 
         if respuesta == 's':
             print("¡Genial! Adiviné tu edad en {} intentos.".format(intentos))
@@ -64,16 +67,11 @@ def adivinar_edad():
         elif respuesta == 'l':
             limite_superior = numero_adivinado - 1
         else:
-            print("Respuesta inválida. Por favor, ingresa 's', 'm' o 'l'.")
+            print("Respuesta inválida. Por favor, ingresa 'S', 'M' o 'L'.")
 
 def menu():
-    print("¡Bienvenido al Menú de Juegos!")
-    print("1. Adivinar el número")
-    print("2. Adivina la edad")
-    print("3. Salir")
-
     while True:
-        print("¡Bienvenido al Menú de Juegos!")
+        print("\n¡Bienvenido al Menú de Juegos!")
         print("1. Adivinar el número")
         print("2. Adivina la edad")
         print("3. Salir")
