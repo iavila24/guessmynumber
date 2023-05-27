@@ -1,5 +1,6 @@
 import random
 from pygame import mixer
+import game_pc_vs_user
 
 def computer_guess():
     mixer.init()
@@ -74,14 +75,17 @@ def menu():
         print("\n¡Bienvenido al Menú de Juegos!")
         print("1. Adivinar el número")
         print("2. Adivina la edad")
-        print("3. Salir")
-        seleccion = input("Ingresa el número de juego que deseas jugar (1-3): ")
+        print("3. Adivina el número User vs. PC")
+        print("4. Salir")
+        seleccion = input("Ingresa el número de juego que deseas jugar (1-4): ")
 
         if seleccion == '1':
             computer_guess()
         elif seleccion == '2':
             adivinar_edad()
         elif seleccion == '3':
+            game_pc_vs_user.begin_game()
+        elif seleccion == '4':
             print("¡Gracias por jugar!")
             break
         else:
