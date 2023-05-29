@@ -1,8 +1,4 @@
 import random
-try:
-    from main import menu
-except ImportError:
-    pass
 
 def guess_word():
     words = ["python", "programación", "juego", "computadora", "programa"]
@@ -37,11 +33,3 @@ def guess_word():
             print("¡Felicidades! Adivinaste la palabra.")
             break
 
-    else:
-        print("¡Oh no! Agotaste tus intentos. La palabra era '{}'.".format(secret_word))
-
-    play_again = input("¿Quieres jugar de nuevo? (s/n): ")
-    if play_again.lower() == 's':
-        menu()
-    else:
-        print("¡Gracias por jugar!")

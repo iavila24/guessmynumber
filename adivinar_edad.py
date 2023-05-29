@@ -1,8 +1,4 @@
 import random
-try:
-    from main import menu
-except ImportError:
-    pass
 
 def adivinar_edad():
     print("¡Bienvenido al juego de adivinar la edad!")
@@ -35,8 +31,3 @@ def adivinar_edad():
             print("¡Has hecho trampa cambiando tus respuestas! Eres un tramposo.")
             return
 
-    play_again = input("¿Quieres jugar de nuevo? (s/n): ")
-    if play_again.lower() == 's':
-        menu()
-    else:
-        print("¡Gracias por jugar!")

@@ -51,9 +51,3 @@ def computer_guess():
         print("\nÚltimos 5 nombres almacenados:")
         for name_line in last_five_names:
             print(name_line.strip())
-
-    play_again = input("¿Quieres jugar de nuevo? (s/n): ")
-    if play_again.lower() == 's':
-        menu()
-    else:
-        print("¡Gracias por jugar!")
