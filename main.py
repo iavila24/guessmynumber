@@ -1,13 +1,23 @@
 import random
 from pygame import mixer
+from colorama import Fore, Back, Style
+from art import *
+
+
+
+print(Fore.MAGENTA + Back.MAGENTA)
+tprint("GRUPO 372","rnd-small")
 
 def computer_guess():
     mixer.init()
     mixer.music.load('music.mp3')
     mixer.music.play()
 
+    (Fore.GREEN + Back.BLUE)
     name = input("Ingresa tu nombre: ")
+    aprint("Line Brack", number=2)
     x = int(input("Piensa en un número: "))
+    
     low = 1
     high = x
     feedback = ''
@@ -19,6 +29,7 @@ def computer_guess():
             guess = low
 
         feedback = input(f'¿Es {guess} demasiado alto (H), demasiado bajo (L), o correcto (C)? ').lower()
+        aprint("Line Brack", number=4)
 
         if feedback == 'h':
             high = guess - 1
@@ -40,9 +51,13 @@ def computer_guess():
             print(name_line.strip())
 
 def adivinar_edad():
+    print(Fore.GREEN + Back.BLUE)
     print("¡Bienvenido al juego de adivinar la edad!")
+    aprint("Line Brack", number=4)
     print("Piensa en un número entre 1 y 100, y trataré de adivinarlo.")
+    
     print("Cuando estés listo, presiona ENTER.")
+    aprint("Line Brack", number=2)
     input()
 
     limite_inferior = 1
@@ -54,10 +69,13 @@ def adivinar_edad():
         numero_adivinado = random.randint(limite_inferior, limite_superior)
 
         print("¿Tu edad es {}?".format(numero_adivinado))
+        aprint("Line Brack", number=1)
         respuesta = input("Ingresa 's' si es correcto, 'm' si tu edad es mayor o 'l' si es menor: ")
+        aprint("Line Brack", number=5)
 
         if respuesta == 's':
             print("¡Genial! Adiviné tu edad en {} intentos.".format(intentos))
+            
             break
         elif respuesta == 'm':
             limite_inferior = numero_adivinado + 1
@@ -67,24 +85,29 @@ def adivinar_edad():
             print("Respuesta inválida. Por favor, ingresa 's', 'm' o 'l'.")
 
 def menu():
+    print(Fore.GREEN + Back.BLUE)
+    aprint("Line Brack", number=2)
     print("¡Bienvenido al Menú de Juegos!")
+    aprint("Line Brack", number=2)
     print("1. Adivinar el número")
+   
     print("2. Adivina la edad")
+    
     print("3. Salir")
-
+    
+   
     while True:
-        print("¡Bienvenido al Menú de Juegos!")
-        print("1. Adivinar el número")
-        print("2. Adivina la edad")
-        print("3. Salir")
+        aprint("Line Brack", number=4)
         seleccion = input("Ingresa el número de juego que deseas jugar (1-3): ")
-
+        aprint("Line Brack", number=4)
         if seleccion == '1':
             computer_guess()
         elif seleccion == '2':
             adivinar_edad()
         elif seleccion == '3':
+            print(Fore.GREEN + Back.BLUE)
             print("¡Gracias por jugar!")
+            aprint("Line Brack", number=2)
             break
         else:
             print("Selección inválida. Por favor, ingresa un número válido.")
