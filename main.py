@@ -1,5 +1,6 @@
 import random
 from pygame import mixer
+import game_pc_vs_user
 
 def computer_guess():
     mixer.init()
@@ -40,9 +41,9 @@ def computer_guess():
             print(name_line.strip())
 
 def adivinar_edad():
-    print("¡Bienvenido al juego de adivinar la edad!")
-    print("Piensa en un número entre 1 y 100, y trataré de adivinarlo.")
-    print("Cuando estés listo, presiona ENTER.")
+    print("\n¡Bienvenido al juego de adivinar la edad!")
+    print("Ingresa una edad entre 1 y 100, y trataré de adivinarlo.")
+    print("Cuando estés listo, ingresa la edad y presiona ENTER.")
     input()
 
     limite_inferior = 1
@@ -51,10 +52,13 @@ def adivinar_edad():
 
     while True:
         intentos += 1
-        numero_adivinado = random.randint(limite_inferior, limite_superior)
+        if limite_inferior != limite_superior:
+            numero_adivinado = random.randint(limite_inferior, limite_superior)
+        else:
+            numero_adivinado = limite_inferior
 
         print("¿Tu edad es {}?".format(numero_adivinado))
-        respuesta = input("Ingresa 's' si es correcto, 'm' si tu edad es mayor o 'l' si es menor: ")
+        respuesta = input("Ingresa 'S' si es correcto, 'M' si tu edad es mayor o 'L' si es menor: ").lower()
 
         if respuesta == 's':
             print("¡Genial! Adiviné tu edad en {} intentos.".format(intentos))
@@ -64,7 +68,7 @@ def adivinar_edad():
         elif respuesta == 'l':
             limite_superior = numero_adivinado - 1
         else:
-            print("Respuesta inválida. Por favor, ingresa 's', 'm' o 'l'.")
+            print("Respuesta inválida. Por favor, ingresa 'S', 'M' o 'L'.")
 
 
 
@@ -103,20 +107,23 @@ ventana.mainloop()
 
 
 def menu():
-    print("¡Bienvenido al Menú de Juegos!")
-    print("1. Adivinar el número")
-    print("2. Adivina la edad")
-    print("3. Salir")
-
     while True:
-        
-        seleccion = input("Ingresa el número de juego que deseas jugar (1-3): ")
+
+        print("\n¡Bienvenido al Menú de Juegos!")
+        print("1. Adivinar el número")
+        print("2. Adivina la edad")
+        print("3. Adivina el número User vs. PC")
+        print("4. Salir")
+        seleccion = input("Ingresa el número de juego que deseas jugar (1-4): ")
+
 
         if seleccion == '1':
             computer_guess()
         elif seleccion == '2':
             adivinar_edad()
         elif seleccion == '3':
+            game_pc_vs_user.begin_game()
+        elif seleccion == '4':
             print("¡Gracias por jugar!")
             break
         else:
