@@ -1,92 +1,156 @@
 import random
 from pygame import mixer
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton,QGraphicsDropShadowEffect
+from PyQt5.QtCore import QPropertyAnimation,QEasingCurve
+from PyQt5.QtGui import QColor
+from PyQt5 import QtCore,QtWidgets
+from PyQt5.uic import loadUi
 
-def computer_guess():
-    mixer.init()
-    mixer.music.load('music.mp3')
-    mixer.music.play()
+class VentanaPrincipal(QMainWindow):
+    def __init__(self):
+        mixer.init()
+        mixer.music.load('music.mp3')
+        mixer.music.play()
 
-    name = input("Ingresa tu nombre: ")
-    x = int(input("Piensa en un número: "))
-    low = 1
-    high = x
-    feedback = ''
+        super(VentanaPrincipal,self).__init__()
+        loadUi('GUI/Interfaz.ui',self)
 
-    while feedback != 'c':
-        if low != high:
-            guess = random.randint(low, high)
+        self.setWindowTitle("Menu Principal")
+        
+        self.bt_menu_uno.clicked.connect(self.mover_menu)
+        self.bt_menu_dos.clicked.connect(self.mover_menu)
+
+        self.bt_restaurar.hide()
+        self.bt_menu_dos.hide()
+
+        self.sombra_frame(self.frame_superior)
+        self.sombra_frame(self.bt_Numero)
+        
+
+        #Control barra de titulos
+        self.bt_minimizar.clicked.connect(self.control_bt_minimizar)
+        self.bt_restaurar.clicked.connect(self.control_bt_normal)
+        self.bt_maximizar.clicked.connect(self.control_bt_maximizar)
+        self.bt_cerrar.clicked.connect(lambda: self.close())
+
+        #Eliminar barra de titulo
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.setWindowOpacity(1)
+
+        #SizeGrip
+        self.gripSize=10
+        self.grip= QtWidgets.QSizeGrip(self)
+        self.grip.resize(self.gripSize, self.gripSize)
+
+        #Mover Ventana
+        self.frame_superior.mouseMoveEvent = self.mover_ventana
+
+        self.Etiqueta.setText("Ingresa tu nombre: ") 
+        self.Etiqueta_2.setText("Piensa en un número: ") 
+
+        self.boton_verificar.clicked.connect(self.adivinar_numero)
+
+
+    def adivinar_numero(self):
+       name = self.entrada_nombre.text()
+       i=2
+       x = int(self.entrada_numero.text())
+       low = 1
+       high = x
+       guess = random.randint(low, high)
+       
+       
+       
+       if x==guess:
+           self.etiqueta_resultado.setText(('He adivinado tu numero es ' + str(guess)).lower())
+           with open('nombres.txt', 'a') as file:
+                file.write(f'\nNombre: {name}')# Se corrigio el error de espacio en el codigo
+
+           with open('nombres.txt', 'r') as file:
+                lines = file.readlines()
+                last_five_names = lines[-5:]
+                print("\nÚltimos 5 nombres almacenados:")
+                for name_line in last_five_names:
+                    print(name_line.strip())
+       else:
+           self.etiqueta_resultado.setText(('Me equivoque tu numero es ' + str(guess)).lower())
+           with open('nombres.txt', 'a') as file:
+                file.write(f'\nNombre: {name}')# Se corrigio el error de espacio en el codigo
+
+           with open('nombres.txt', 'r') as file:
+                lines = file.readlines()
+                last_five_names = lines[-5:]
+                print("\nÚltimos 5 nombres almacenados:")
+                for name_line in last_five_names:
+                    print(name_line.strip())
+
+    def control_bt_minimizar(self):
+        self.showMinimized()
+
+    def control_bt_normal(self):
+        self.showNormal()
+        self.bt_restaurar.hide()
+        self.bt_maximizar.show()
+
+    def control_bt_maximizar(self):
+        self.showMaximized()
+        self.bt_maximizar.hide()
+        self.bt_restaurar.show()    
+
+    #Metodo para sombras
+    def sombra_frame(self, frame):
+        sombra = QGraphicsDropShadowEffect(self)
+        sombra.setBlurRadius(30)    
+        sombra.setXOffset(8)
+        sombra.setYOffset(8)
+        sombra.setColor(QColor(20, 200, 220, 255))
+        frame.setGraphicsEffect(sombra)
+
+    def resizeEvent(self, event):
+        rect = self.rect()
+        self.grip.move(rect.right() - self.gripSize, rect.bottom() - self.gripSize)
+
+    #Mover ventana
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+
+    def mover_ventana(self, event):
+        if self.isMaximized()== False:
+            if event.buttons() == QtCore.Qt.LeftButton:
+                self.move(self.pos() + event.globalPos() - self.clickPosition)
+                self.clickPosition = event.globalPos()
+                event.accept()
+        if event.globalPos().y() <=10:
+            self.showMaximized()
+            self.bt_restaurar.hide()
+            self.bt_maximizar.show()
         else:
-            guess = low
-
-        feedback = input(f'¿Es {guess} demasiado alto (H), demasiado bajo (L), o correcto (C)? ').lower()
-
-        if feedback == 'h':
-            high = guess - 1
-        elif feedback == 'l':
-            low = guess + 1
-
-    mixer.music.stop()
-
-    print(f'¡Yay! ¡La computadora adivinó tu número, {guess}, correctamente!')
-
-    with open('nombres.txt', 'a') as file:
-        file.write(f'Nombre: {name}\n')
-
-    with open('nombres.txt', 'r') as file:
-        lines = file.readlines()
-        last_five_names = lines[-5:]
-        print("\nÚltimos 5 nombres almacenados:")
-        for name_line in last_five_names:
-            print(name_line.strip())
-
-def adivinar_edad():
-    print("¡Bienvenido al juego de adivinar la edad!")
-    print("Piensa en un número entre 1 y 100, y trataré de adivinarlo.")
-    print("Cuando estés listo, presiona ENTER.")
-    input()
-
-    limite_inferior = 1
-    limite_superior = 100
-    intentos = 0
-
-    while True:
-        intentos += 1
-        numero_adivinado = random.randint(limite_inferior, limite_superior)
-
-        print("¿Tu edad es {}?".format(numero_adivinado))
-        respuesta = input("Ingresa 's' si es correcto, 'm' si tu edad es mayor o 'l' si es menor: ")
-
-        if respuesta == 's':
-            print("¡Genial! Adiviné tu edad en {} intentos.".format(intentos))
-            break
-        elif respuesta == 'm':
-            limite_inferior = numero_adivinado + 1
-        elif respuesta == 'l':
-            limite_superior = numero_adivinado - 1
-        else:
-            print("Respuesta inválida. Por favor, ingresa 's', 'm' o 'l'.")
-
-def menu():
-    print("¡Bienvenido al Menú de Juegos!")
-    print("1. Adivinar el número")
-    print("2. Adivina la edad")
-    print("3. Salir")
-
-    while True:
-        print("¡Bienvenido al Menú de Juegos!")
-        print("1. Adivinar el número")
-        print("2. Adivina la edad")
-        print("3. Salir")
-        seleccion = input("Ingresa el número de juego que deseas jugar (1-3): ")
-
-        if seleccion == '1':
-            computer_guess()
-        elif seleccion == '2':
-            adivinar_edad()
-        elif seleccion == '3':
-            print("¡Gracias por jugar!")
-            break
-        else:
-            print("Selección inválida. Por favor, ingresa un número válido.")
-
-menu()
+            self.showNormal()
+            self.bt_restaurar.hide()
+            self.bt_maximizar.show()    
+                           
+    def mover_menu(self):
+        if True:
+            width = self.menu_lateral.width()
+            normal = 0
+            if width==0:
+                extender=300
+                self.bt_menu_dos.hide()
+                self.bt_menu_uno.show()
+            else:
+                self.bt_menu_dos.show()    
+                self.bt_menu_uno.hide()
+                extender = normal
+            self.animacion = QPropertyAnimation(self.menu_lateral, b"maximumWidth")
+            self.animacion.setStartValue(width)
+            self.animacion.setEndValue(extender)
+            self.animacion.setDuration(500)
+            self.animacion.setEasingCurve(QEasingCurve.OutInBack)
+            self.animacion.start()               
+    
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    mi_app = VentanaPrincipal()
+    mi_app.show()
+    sys.exit(app.exec_())
