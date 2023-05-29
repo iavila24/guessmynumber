@@ -70,14 +70,52 @@ def adivinar_edad():
         else:
             print("Respuesta inválida. Por favor, ingresa 'S', 'M' o 'L'.")
 
+
+
+#Ventana de bienvenida al proyeto
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import *
+
+#Ventana emergente
+def ask_quit():
+    if messagebox.askokcancel("", "El proyecto continuará en la terminal."):
+        ventana.destroy()
+#Ventana
+ventana= tk.Tk()
+ventana.geometry("400x400")
+ventana.title("Proyecto")
+ventana['bg'] = '#3498DB'
+#Etiqueta
+Label = tk.Label(ventana, text="Bienvenido al proyecto del grupo 372 !", font='Helvetica 15 bold', fg='white')
+Label.config(bg="#3498DB")
+Label.pack()
+Label = tk.Label(ventana, text="Powered by Python", font='Helvetica 11 bold', fg='white')
+Label.config(bg="#3498DB")
+Label.pack()
+#Boton
+boton = tk.Button(text="Ir al menú de juegos", bg='#F4D03F' ,fg='black', font='Helvetica 11 bold', command=ask_quit)
+boton.place(x=200, y=325)
+# Imagen
+image2 = tk.PhotoImage(file="logo.png")
+label2 = tk.Label(image=image2)
+label2.config(bg="#3498DB")
+label2.pack()
+ventana.mainloop()
+#Aqui finaliza la ventana de bienvenido
+
+
+
 def menu():
     while True:
+
         print("\n¡Bienvenido al Menú de Juegos!")
         print("1. Adivinar el número")
         print("2. Adivina la edad")
         print("3. Adivina el número User vs. PC")
         print("4. Salir")
         seleccion = input("Ingresa el número de juego que deseas jugar (1-4): ")
+
 
         if seleccion == '1':
             computer_guess()
