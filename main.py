@@ -1,5 +1,6 @@
 import random
 from pygame import mixer
+from ahorcado import ahorcado
 
 def computer_guess():
     mixer.init()
@@ -67,23 +68,21 @@ def adivinar_edad():
             print("Respuesta inválida. Por favor, ingresa 's', 'm' o 'l'.")
 
 def menu():
-    print("¡Bienvenido al Menú de Juegos!")
-    print("1. Adivinar el número")
-    print("2. Adivina la edad")
-    print("3. Salir")
-
     while True:
         print("¡Bienvenido al Menú de Juegos!")
         print("1. Adivinar el número")
         print("2. Adivina la edad")
-        print("3. Salir")
-        seleccion = input("Ingresa el número de juego que deseas jugar (1-3): ")
+        print("3. Ahorcado")
+        print("4. Salir")
+        seleccion = input("Ingresa el número de juego que deseas jugar (1-4): ")
 
         if seleccion == '1':
             computer_guess()
         elif seleccion == '2':
             adivinar_edad()
         elif seleccion == '3':
+            ahorcado()
+        elif seleccion == '4':
             print("¡Gracias por jugar!")
             break
         else:
