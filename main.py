@@ -3,10 +3,14 @@ from adivinar_edad import adivinar_edad
 import game_pc_vs_user
 from adivinar_palabra import guess_word
 from piedra_papel_tijera import jugar_piedra_papel_tijera
+from colorama import Fore, Back, Style
+from art import *
 
 def menu():
 
     while True:
+         
+         print(Back.BLUE)
          print("\n¡Bienvenido al Menú de Juegos!")
          print("1. Adivinar el número")
          print("2. Adivina la edad")
@@ -29,6 +33,7 @@ def menu():
             jugar_piedra_papel_tijera()
          elif seleccion == '6':
             print("¡Gracias por jugar!")
+            aprint("Line Brack", number=2)
             break
          else:
             print("Selección inválida. Por favor, ingresa un número válido.")

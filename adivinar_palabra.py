@@ -1,5 +1,7 @@
 import random
-
+from colorama import Fore, Back, Style
+from art import *
+aprint("random",number=3)
 def guess_word():
     words = ["python", "programación", "juego", "computadora", "programa"]
     secret_word = random.choice(words).lower()

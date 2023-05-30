@@ -1,7 +1,11 @@
 import random
+from colorama import Fore, Back, Style
+from art import *
+
 
 def adivinar_edad():
     print("¡Bienvenido al juego de adivinar la edad!")
+
     print("Piensa en un número entre 1 y 100, y trataré de adivinarlo.")
     print("Cuando estés listo, presiona ENTER.")
     input()

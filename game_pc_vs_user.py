@@ -1,6 +1,8 @@
 import random
-
+from colorama import Fore, Back, Style
+from art import *
 guesses = set()
+
 
 def begin_game():
     print("\n¡Bienvenido al juego de adivinar el número!")

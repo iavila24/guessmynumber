@@ -1,5 +1,8 @@
 import random
 from pygame import mixer
+from colorama import Fore, Back, Style
+from art import *
+
 
 
 def computer_guess():
@@ -11,6 +14,7 @@ def computer_guess():
     x = 0
     while x <= 1:
         try:
+            aprint("random",number=3)
             x = int(input("Piensa en un número mayor que 1: "))
             if x <= 1:
                 print("El número debe ser mayor que 1. Intenta de nuevo.")
