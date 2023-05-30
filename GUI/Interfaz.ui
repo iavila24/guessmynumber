@@ -583,7 +583,7 @@ background-color: black;
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0,0">
+            <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0">
              <property name="spacing">
               <number>0</number>
              </property>
@@ -609,16 +609,6 @@ background-color: black;
                </property>
                <property name="text">
                 <string/>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="letra"/>
-             </item>
-             <item>
-              <widget class="QPushButton" name="boton_letra">
-               <property name="text">
-                <string>Ingresa la letra</string>
                </property>
               </widget>
              </item>
