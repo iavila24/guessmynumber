@@ -1,4 +1,10 @@
-Nombre: EduardoNombre: Juan
-Nombre: Juanito
-Nombre: 1
-Nombre: 1
+Nombre: Eduardo
+Nombre: Miriam
+Nombre: Vanessa
+Nombre: SugarPie
+Nombre: Rubidium
+Nombre: SugarPie
+Nombre: SugarPie
+Nombre: Rubidium
+Nombre: SugarPie
+Nombre: Miriam
